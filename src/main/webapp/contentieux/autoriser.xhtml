@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="breadcrumb">
+        <li>Pages</li>
+        <li>/</li>
+        <li><p:link outcome="/contentieux/empty">Empty</p:link></li>
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="card">
+                        <h:form>
+                            <p:toolbar>
+                                <f:facet name="left">
+                                    <p:commandButton type="button" value="New" icon="fa fa-plus" />
+
+                                    <p:commandButton type="button" value="Open" icon="fa fa-folder-open" />
+
+                                    <span class="ui-separator" style="padding-right: 5px;">
+                                        <span class="fa fa-ellipsis-v SoftGray" />
+                                    </span>
+
+                                    <p:commandButton type="button" title="Save" icon="fa fa-save" />
+                                    <p:commandButton type="button" title="Delete" icon="fa fa-trash" />
+                                    <p:commandButton type="button" title="Print" icon="fa fa-print" />
+                                </f:facet>
+
+                                <f:facet name="right">
+                                    <p:menuButton value="Options">
+                                        <p:menuitem value="Save" icon="fa fa-save" />
+                                        <p:menuitem value="Update" icon="fa fa-upload" />
+                                        <p:menuitem value="Delete" icon="fa fa-trash" />
+                                        <p:menuitem value="Homepage" icon="fa fa-home" />
+                                    </p:menuButton>
+                                </f:facet>
+                            </p:toolbar>
+                            
+                        <p:dataTable var="car" value="#{dtSelectionView.cars7}" 
+                                     selectionMode="single" reflow="true"
+                                     paginatorPosition="bottom"
+                                     selection="#{dtSelectionView.selectedCar}" 
+                                     rowKey="#{car.id}" paginator="true" rows="5">
+                            <p:column headerText="Id" sortBy="#{car.id}" filterBy="#{car.id}" filterMatchMode="contains">
+                                <h:outputText value="#{car.id}" />
+                            </p:column>
+                            <p:column headerText="Year" sortBy="#{car.year}" filterBy="#{car.year}" filterMatchMode="contains">
+                                <h:outputText value="#{car.year}" />
+                            </p:column>
+                            <p:column headerText="Brand" sortBy="#{car.brand}" filterBy="#{car.brand}" filterMatchMode="contains">
+                                <h:outputText value="#{car.brand}" />
+                            </p:column>
+                            <p:column headerText="Color" sortBy="#{car.color}" filterBy="#{car.color}" filterMatchMode="contains">
+                                <h:outputText value="#{car.color}" />
+                            </p:column>
+                        </p:dataTable>
+                        </h:form>
+                </div>
+            </div>
+        </div>
+        
+    </ui:define>
+
+</ui:composition>

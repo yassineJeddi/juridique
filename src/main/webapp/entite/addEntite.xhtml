@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="breadcrumb">
+        <li>Pages</li>
+        <li>/</li>
+        <li><p:link outcome="/contentieux/empty">Empty</p:link></li>
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="ui-g-1"></div>
+            <div class="ui-g-10">
+                <div class="card">
+                    <h1>Ajouter Entite</h1>
+                    <h:form id="addEntitePanel">
+                        <div class="card no-margin">
+                            <p:panelGrid columns="2" style="margin-bottom:10px"  styleClass="ui-panelgrid-blank">
+                                <p:outputLabel for="typeEntite" value="Type : " />
+                                <p:selectOneMenu id="typeEntite"  filter="true" filterMatchMode="contains">
+                                    <f:selectItem itemLabel="Morale" itemValue="1" />
+                                    <f:selectItem itemLabel="Personnel " itemValue="2" />
+                                    <f:selectItem itemLabel="Professionel" itemValue="3" />
+                                </p:selectOneMenu>
+                                <p:outputLabel for="nom" value="Nom : " />
+                                <p:inputText   id="nom" value="#{entiteMB.entite.nom}" placeholder="Nom"/>
+                                <p:outputLabel for="email" value="Email : " />
+                                <p:inputText id="email" value="#{entiteMB.entite.email}" placeholder="Email" >
+                                </p:inputText>
+                                <p:outputLabel for="tele" value="Phone : " />
+                                <p:inputMask  id="tele" placeholder="Phone" value="#{entiteMB.entite.tele}" mask="(999) 999-9999? x99999"/>
+                                <p:outputLabel for="fax" value="Fax : " />
+                                <p:inputMask  id="fax" placeholder="Fax"  value="#{entiteMB.entite.faxe}" mask="(999) 999-9999? x99999"/>
+                                <p:outputLabel for="adresse" value="Address : " />
+                                <p:inputText id="adresse" value="#{entiteMB.entite.adresse}" placeholder="Address"/> 
+                            </p:panelGrid>
+                        </div>
+                        <p:toolbar>
+                            <f:facet name="left">
+                                <p:commandButton value="Vider les champs" styleClass="cyan-btn" immediate="true" ajax="false" style="margin-right:20px;">
+                                    <p:resetInput target="addEntitePanel" />
+                                </p:commandButton>
+                                <p:commandButton value="Enregistrer" update="addEntitePanel" action="#{entiteMB.addEntite()}"   styleClass="green-btn"  style="margin-right:20px;" />
+                            </f:facet>
+                            <f:facet name="right">
+                            </f:facet>
+                        </p:toolbar> 
+                    </h:form>    
+                </div>
+            </div>
+            </div>
+            
+            <div class="ui-g-1"></div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

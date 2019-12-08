@@ -1,0 +1,84 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+    
+   
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <!-- Debut de declaration des beans d'aplication -->
+    
+    
+    <!-- Entite -->
+    <bean id="entiteService" class="com.ynsolution.juridique.MDEntite.ServiceImp.EntiteServiceImp">
+        <property name="entiteDao" ref="entiteDao" /> 
+    </bean>
+    <bean id="entiteDao" class="com.ynsolution.juridique.MDEntite.DaoImp.EntiteDaoImp">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <!-- TypeEntite -->
+    <bean id="typeEntiteService" class="com.ynsolution.juridique.MDEntite.ServiceImp.TypeEntiteServiceImp">
+        <property name="typeEntiteDao" ref="typeEntiteDao" /> 
+    </bean>
+    <bean id="typeEntiteDao" class="com.ynsolution.juridique.MDEntite.DaoImp.TypeEntiteDaoImp">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    
+    <!-- Avocat -->
+    <bean id="avocatService" class="com.ynsolution.juridique.MDConf.ServiceImp.AvocatServiceImp">
+        <property name="avocatDAOImp" ref="avocatDAOImp" /> 
+    </bean>
+    <bean id="avocatDAOImp" class="com.ynsolution.juridique.MDConf.DaoImp.AvocatDaoImp">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- Fin de declaration des beans d'aplication -->
+    
+    <bean  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>/WEB-INF/properties/database.properties</value>
+        </property>
+    </bean>
+    
+    <bean id="sessionFactory"  class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource">
+            <ref bean="dataSource" />
+        </property> 
+        <property name="packagesToScan" value="com.ynsolution" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop> 
+                <prop key="hibernate.show_sql">false</prop>  
+                
+                <!--<prop key="hibernate.format_sql">true</prop>--> 
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="dataSource" 
+          class="com.ynsolution.juridique.utilitaire.RunzDriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+    </bean>
+    
+</beans>

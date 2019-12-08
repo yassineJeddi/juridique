@@ -1,0 +1,102 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12">
+                    <div class="card">
+                        <h:form>
+                            <p:toolbar>
+                                <f:facet name="left">
+                                    <p:commandButton type="button" value="New" icon="fa fa-plus" />
+
+                                    <!-- <p:commandButton type="button" value="Open" icon="fa fa-folder-open" /> -->
+
+                                    <span class="ui-separator" style="padding-right: 5px;">
+                                        <span class="fa fa-ellipsis-v SoftGray" />
+                                    </span>
+<!--
+                                    <p:commandButton type="button" title="Save" icon="fa fa-save" />
+                                    <p:commandButton type="button" title="Delete" icon="fa fa-trash" />
+                                    <p:commandButton type="button" title="Print" icon="fa fa-print" />
+-->
+                                    <p:commandButton type="button" title="Export EXEL" icon="fa fa-file-excel-o" />
+                                    <p:commandButton type="button" title="Export PDF" icon="fa fa-file-pdf-o" >
+                                        <p:dataExporter type="xls" target="car" fileName="cars" />
+                                    </p:commandButton>
+                                </f:facet>
+
+                                <f:facet name="right">
+                                    <p:menuButton value="Options">
+                                        <p:menuitem value="Save" icon="fa fa-save" />
+                                        <p:menuitem value="Update" icon="fa fa-upload" />
+                                        <p:menuitem value="Delete" icon="fa fa-trash" />
+                                        <p:menuitem value="Homepage" icon="fa fa-home" />
+                                    </p:menuButton>
+                                </f:facet>
+                            </p:toolbar>
+                        </h:form>
+                    </div>
+            </div>
+            <div class="ui-g-12">
+                <div class="card no-margin">
+                        <h:form>
+                            <p:dataTable id="avocat" widgetVar="avocat" var="avocat" value="#{avocatMB.avocats}" 
+                                selectionMode="single" reflow="true"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                selection="#{avocatMB.avocat}" 
+                                paginatorPosition="bottom"
+                                rowKey="#{avocat.id}" paginator="true"  rows="10">
+                        <p:column headerText="N° system" sortBy="#{avocat.id}"  filterBy="#{avocat.id}" filterMatchMode="contains">
+                            <h:outputText value="#{avocat.id}" />
+                        </p:column>
+
+                        <p:column headerText="Nom et Prenom" sortBy="#{avocat.nom} #{avocat.prenom}"  filterBy="#{avocat.nom} #{avocat.prenom}" filterMatchMode="contains">
+                            <h:outputText value="#{avocat.nom} #{avocat.prenom}" />
+                        </p:column>
+                                
+                        <p:column headerText="Telephone" sortBy="#{avocat.telephone}"  filterBy="#{avocat.telephone}" filterMatchMode="contains">
+                            <h:outputText value="#{avocat.telephone}" />
+                        </p:column>
+                                
+                        <p:column headerText="Email" sortBy="#{avocat.email}"  filterBy="#{avocat.email}" filterMatchMode="contains">
+                            <h:outputText value="#{avocat.email}" />
+                        </p:column>
+
+                        <p:column headerText="Adresse Bureau" sortBy="#{avocat.adresseBureau}"  filterBy="#{avocat.adresseBureau}" filterMatchMode="contains">
+                            <h:outputText value="#{avocat.adresseBureau}" />
+                        </p:column>
+
+                        <p:column headerText="Actions" >
+                            <p:commandButton value="Save" icon="fa fa-save" />
+                            <p:commandButton value="Update" icon="fa fa-upload" />
+                            <p:commandButton value="Delete" icon="fa fa-trash" />
+                            <p:commandButton value="Homepage" icon="fa fa-home" />
+                        </p:column>
+                    </p:dataTable>
+                        </h:form>
+                </div>
+            </div>
+        </div>
+        <p:dialog header="Ajouter Avocat" id="addAvocat" widgetVar="addAvocat" >
+            <p:panel id="basic" header="Basic Panel" footer="Panel Footer" style="margin-bottom:20px">
+                <h:panelGrid columns="2" cellpadding="10">
+                    <i class="fa fa-apple Fs60"></i>
+                    <h:outputText
+                        value="CUPERTINO, California—January 27, 2015—Apple® today announced financial results for its
+                        fiscal 2015 first quarter ended December 27, 2014. The Company posted record quarterly revenue of 
+                        $74.6 billion and record quarterly net profit of $18 billion, or $3.06 per diluted share. These results 
+                        compare to revenue of $57.6 billion and net profit of $13.1 billion, or $2.07 per diluted share, in the 
+                        year-ago quarter. Gross margin was 39.9 percent compared to 37.9 percent in the year-ago quarter. 
+                        International sales accounted for 65 percent of the quarter’s revenue." />
+                </h:panelGrid>
+            </p:panel>
+        </p:dialog>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,115 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pa="http://primefaces.org/apollo">
+
+    <div class="layout-menu-container">
+        <div class="nano">
+            <div class="nano-content menu-scroll-content">
+                <div class="layout-menu-title">MENU</div>
+                <h:form id="menuform">
+                    <pa:menu>
+                        <p:menuitem id="apl_dashboard" value="Dashboard" icon="fa fa-dashboard" outcome="/home/dashboard"/>
+                        <p:submenu id="aex_default" label="Actions extrajudiciaires"  styleClass="orange-theme" icon="fa fa-connectdevelop">
+                            <p:menuitem id="aex_empty" value="Empty Page" styleClass="blue-theme" icon="fa fa-square-o" outcome="/actionsExtrajudiciaires/empty" />
+                            <p:menuitem id="aex_config" value="Configuration"  styleClass="blue-theme"  icon="fa fa-cogs" outcome="/actionsExtrajudiciaires/configurer" />
+                            <p:menuitem id="aex_autori" value="Autorisation" styleClass="pink-theme" icon="fa fa-street-view" outcome="/actionsExtrajudiciaires/autoriser" />
+                        </p:submenu>
+
+                        <p:submenu id="ctx_default" label="Contentieux" icon="fa fa-bank">
+                            <p:menuitem id="ctx_gerer" value="Gerer" icon="fa fa-sliders" outcome="/contentieux/gerer" />
+                            <p:menuitem id="ctx_empty" value="Empty Page" icon="fa fa-square-o" outcome="/contentieux/empty" />
+                            <p:menuitem id="ctx_config" value="Configuration"  styleClass="blue-theme"  icon="fa fa-cogs" outcome="/contentieux/configurer" />
+                            <p:menuitem id="ctx_autori" value="Autorisation" styleClass="pink-theme" icon="fa fa-street-view" outcome="/contentieux/autoriser" />
+                        </p:submenu>
+
+                        <p:submenu id="ctr_default" label="Contrats" icon="fa fa-files-o">
+                            <p:menuitem id="ctr_empty" value="Empty Page" icon="fa fa-square-o" outcome="/contrat/empty" />
+                            <p:menuitem id="ctr_gerer" value="Gerer" icon="fa fa-sliders" outcome="/contrat/gerer" />
+                            <p:menuitem id="ctr_config" value="Configuration"  styleClass="blue-theme"  icon="fa fa-cogs" outcome="/contrat/configurer" />
+                            <p:menuitem id="ctr_autori" value="Autorisation" styleClass="pink-theme" icon="fa fa-street-view" outcome="/contrat/autoriser" />
+                        </p:submenu>
+                        
+                        <p:submenu id="cti_default" label="Clients" icon="fa fa-users">
+                            <p:menuitem id="cti_empty" value="Empty Page" icon="fa fa-square-o" outcome="/client/empty" />
+                            <p:menuitem id="cti_gerer" value="Gerer" icon="fa fa-sliders" outcome="/client/gerer" />
+                            <p:menuitem id="cti_config" value="Configuration"  styleClass="blue-theme"  icon="fa fa-cogs" outcome="/client/configurer" />
+                            <p:menuitem id="cti_autori" value="Autorisation" styleClass="pink-theme" icon="fa fa-street-view" outcome="/client/autoriser" />
+                        </p:submenu>
+                        
+                        <p:submenu id="ent_default" label="Entités" icon="fa fa-sitemap">
+                            <p:menuitem id="ent_empty" value="Empty Page" icon="fa fa-square-o" outcome="/entite/empty" />
+                            <p:menuitem id="ent_gerer" value="Gerer" icon="fa fa-sliders" outcome="/entite/gerer" />
+                            <p:menuitem id="ent_config" value="Configuration"  styleClass="blue-theme"  icon="fa fa-cogs" outcome="/entite/configurer" />
+                            <p:menuitem id="ent_autori" value="Autorisation" styleClass="pink-theme" icon="fa fa-street-view" outcome="/entite/autoriser" />
+                        </p:submenu>
+                        
+                        <p:submenu id="dos_default" label="Dossiers" icon="fa fa-folder-open-o">
+                            <p:menuitem id="dos_empty" value="Empty Page" icon="fa fa-square-o" outcome="/dossier/empty" />
+                            <p:menuitem id="dos_gerer" value="Gerer" icon="fa fa-sliders" outcome="/dossier/gerer" />
+                            <p:menuitem id="dos_config" value="Configuration"  styleClass="blue-theme"  icon="fa fa-cogs" outcome="/dossier/configurer" />
+                            <p:menuitem id="dos_autori" value="Autorisation" styleClass="pink-theme" icon="fa fa-street-view" outcome="/dossier/autoriser" />
+                        </p:submenu>
+                        
+                        <p:submenu id="conf_default" label="Configurations" icon="fa fa-cogs">
+                            <p:menuitem id="conf_empty" value="Empty Page" icon="fa fa-square-o" outcome="/configuration/empty" />
+                            <p:menuitem id="conf_gerer" value="Gerer" icon="fa fa-sliders" outcome="/configuration/gerer" />
+                            <p:menuitem id="conf_avoc" value="Avocats" icon="fa fa-gavel" outcome="/configuration/avocat" />
+                            <p:menuitem id="conf_config" value="Configuration"  styleClass="blue-theme"  icon="fa fa-cogs" outcome="/configuration/configurer" />
+                            <p:menuitem id="conf_autori" value="Autorisation" styleClass="pink-theme" icon="fa fa-street-view" outcome="/configuration/autoriser" />
+                        </p:submenu>
+                        
+                        <p:submenu id="adm_default" label="Administrations" icon="fa fa-street-view">
+                            <p:menuitem id="adm_empty" value="Empty Page" icon="fa fa-square-o" outcome="/administration/empty" />
+                            <p:menuitem id="adm_gerer" value="Gerer" icon="fa fa-sliders" outcome="/administration/gerer" />
+                            <p:menuitem id="adm_config" value="Configuration"  styleClass="blue-theme"  icon="fa fa-cogs" outcome="/administration/configurer" />
+                            <p:menuitem id="adm_autori" value="Autorisation" styleClass="pink-theme" icon="fa fa-street-view" outcome="/administration/autoriser" />
+                        </p:submenu>
+                        
+                        
+                        <p:submenu id="apl_components" label="Components" icon="fa ">
+                            <p:menuitem id="apl_charts" value="Charts" icon="fa fa-area-chart" outcome="/home/charts" />
+                            <p:menuitem id="apl_sample" value="Sample Page" icon="fa fa-columns" outcome="/home/sample" />
+                            <p:menuitem id="apl_forms" value="Forms" icon="fa fa-code" outcome="/home/forms" />
+                            <p:menuitem id="apl_data" value="Data" icon="fa fa-table" outcome="/home/data" />
+                            <p:menuitem id="apl_panels" value="Panels" icon="fa fa-list-alt" outcome="/home/panel" />
+                            <p:menuitem id="apl_overlays" value="Overlays" icon="fa fa-square" outcome="/home/overlay" />
+                            <p:menuitem id="apl_menucomponents" value="Menus" icon="fa fa-minus-square-o" outcome="/home/menu" />
+                            <p:menuitem id="apl_messages" value="Messages" icon="fa fa-circle-o-notch" outcome="/home/messages" />
+                            <p:menuitem id="apl_file" value="File" icon="fa fa-arrow-circle-o-up" outcome="/home/file" />
+                            <p:menuitem id="apl_misc" value="Misc" icon="fa fa-user-secret" outcome="/home/misc" />
+                            <p:menuitem id="apl_config" value="Configuration"  styleClass="blue-theme"  icon="fa fa-cogs" outcome="/home/empty" />
+                            <p:menuitem id="apl_autori" value="Autorisation" styleClass="pink-theme" icon="fa fa-street-view" outcome="/home/empty" />
+                            <p:menuitem id="apl_empty" value="Empty Page" icon="fa fa-square-o" outcome="/home/empty" />
+                            <p:menuitem id="apl_landing" value="Landing" icon="fa fa-certificate" outcome="/home/empty"/>
+                            <p:menuitem id="apl_login" value="Login Page" icon="fa fa-sign-in" outcome="/home/empty" />
+                            <p:menuitem id="apl_error" value="Error Page" icon="fa fa-exclamation-circle" outcome="/home/empty" />
+                            <p:menuitem id="apl_404" value="404 Page" icon="fa fa-times" outcome="/home/empty" />
+                            <p:menuitem id="apl_access" value="Access Denied Page" icon="fa fa-exclamation-triangle" outcome="/home/empty" />
+                        </p:submenu>
+                    </pa:menu>
+                    <!--
+                    <div class="layout-menu-footer">
+                        <div class="layout-menu-footer-title">TASKS</div>
+
+                        <div class="layout-menu-footer-content">
+                            <p:progressBar value="50" labelTemplate="" displayOnly="true"/>
+                            Today
+
+                            <p:progressBar value="80" labelTemplate=""  displayOnly="true"/>
+                            Overall
+                        </div>
+                    </div>
+                    -->
+                </h:form>
+                
+                <div class="nano-scroll-footer" />
+            </div>
+        </div>
+    </div>
+
+
+</ui:composition>

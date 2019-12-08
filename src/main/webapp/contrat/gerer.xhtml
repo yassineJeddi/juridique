@@ -1,0 +1,87 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12">
+                    <div class="card">
+                        <h:form>
+                            <p:toolbar>
+                                <f:facet name="left">
+                                    <p:commandButton type="button" value="New" icon="fa fa-plus" />
+
+                                    <!-- <p:commandButton type="button" value="Open" icon="fa fa-folder-open" /> -->
+
+                                    <span class="ui-separator" style="padding-right: 5px;">
+                                        <span class="fa fa-ellipsis-v SoftGray" />
+                                    </span>
+<!--
+                                    <p:commandButton type="button" title="Save" icon="fa fa-save" />
+                                    <p:commandButton type="button" title="Delete" icon="fa fa-trash" />
+                                    <p:commandButton type="button" title="Print" icon="fa fa-print" />
+-->
+                                    <p:commandButton type="button" title="Export EXEL" icon="fa fa-file-excel-o" />
+                                    <p:commandButton type="button" title="Export PDF" icon="fa fa-file-pdf-o" >
+                                        <p:dataExporter type="xls" target="car" fileName="cars" />
+                                    </p:commandButton>
+                                </f:facet>
+
+                                <f:facet name="right">
+                                    <p:menuButton value="Options">
+                                        <p:menuitem value="Save" icon="fa fa-save" />
+                                        <p:menuitem value="Update" icon="fa fa-upload" />
+                                        <p:menuitem value="Delete" icon="fa fa-trash" />
+                                        <p:menuitem value="Homepage" icon="fa fa-home" />
+                                    </p:menuButton>
+                                </f:facet>
+                            </p:toolbar>
+                        </h:form>
+                    </div>
+            </div>
+            <div class="ui-g-12">
+                <div class="card no-margin">
+                        <h:form>
+                            <p:dataTable id="car" widgetVar="car" var="car" value="#{dtSelectionView.cars7}" 
+                                selectionMode="single" reflow="true"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                selection="#{dtSelectionView.selectedCar}" 
+                                paginatorPosition="bottom"
+                                rowKey="#{car.id}" paginator="true"  rows="10">
+                        <p:column headerText="Id" sortBy="#{car.id}"  filterBy="#{car.id}" filterMatchMode="contains">
+                            <h:outputText value="#{car.id}" />
+                        </p:column>
+
+                        <p:column headerText="Year" sortBy="#{car.year}">
+                            <h:outputText value="#{car.year}" />
+                        </p:column>
+
+                        <p:column headerText="Brand" sortBy="#{car.brand}">
+                            <h:outputText value="#{car.brand}" />
+                        </p:column>
+
+                        <p:column headerText="Color" sortBy="#{car.color}">
+                            <h:outputText value="#{car.color}" />
+                        </p:column>
+
+                        <p:column headerText="Actions" >
+                            <p:menuButton value="Options">
+                                <p:menuitem value="Save" icon="fa fa-save" />
+                                <p:menuitem value="Update" icon="fa fa-upload" />
+                                <p:menuitem value="Delete" icon="fa fa-trash" />
+                                <p:menuitem value="Homepage" icon="fa fa-home" />
+                            </p:menuButton>
+                        </p:column>
+                    </p:dataTable>
+                        </h:form>
+                </div>
+            </div>
+        </div>
+        
+    </ui:define>
+
+</ui:composition>
