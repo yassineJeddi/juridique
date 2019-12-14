@@ -13,9 +13,16 @@
                         <h:form>
                             <p:toolbar>
                                 <f:facet name="left">
-                                    <p:commandButton type="button" value="New" icon="fa fa-plus" />
-
-                                    <!-- <p:commandButton type="button" value="Open" icon="fa fa-folder-open" /> -->
+                                    <p:commandButton value="Rechercher" type="button" icon="fa fa-search"  
+                                                     onclick="PF('rechercheAvocat').show();" />
+                                    <span class="ui-separator" style="padding-right: 5px;">
+                                        <span class="fa fa-ellipsis-v SoftGray" />
+                                    </span>
+                                        
+                                    <p:commandButton value="Ajouter" type="button" icon="fa fa-plus" 
+                                                     onclick="PF('ajouterAvocat').show();"
+                                                     action="#{avocatMB.viderParam()}"
+                                                     update=":formAvocat"/>
 
                                     <span class="ui-separator" style="padding-right: 5px;">
                                         <span class="fa fa-ellipsis-v SoftGray" />
@@ -32,20 +39,26 @@
                                 </f:facet>
 
                                 <f:facet name="right">
-                                    <p:menuButton value="Options">
+                                    <p:commandButton value="Aficher Touts" type="button" 
+                                                     icon="fa fa-search" 
+                                                     action="#{avocatMB.chargerAllAvocat()}"
+                                                     update=":formAvocat"/>
+                                    
+ <!--                                   <p:menuButton value="Options">
                                         <p:menuitem value="Save" icon="fa fa-save" />
                                         <p:menuitem value="Update" icon="fa fa-upload" />
                                         <p:menuitem value="Delete" icon="fa fa-trash" />
                                         <p:menuitem value="Homepage" icon="fa fa-home" />
                                     </p:menuButton>
-                                </f:facet>
+-->                                </f:facet>
+
                             </p:toolbar>
                         </h:form>
                     </div>
             </div>
             <div class="ui-g-12">
                 <div class="card no-margin">
-                        <h:form>
+                    <h:form id="formAvocat">
                             <p:dataTable id="avocat" widgetVar="avocat" var="avocat" value="#{avocatMB.avocats}" 
                                 selectionMode="single" reflow="true"
                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -83,8 +96,62 @@
                 </div>
             </div>
         </div>
-        <p:dialog header="Ajouter Avocat" id="addAvocat" widgetVar="addAvocat" >
-            <p:panel id="basic" header="Basic Panel" footer="Panel Footer" style="margin-bottom:20px">
+        
+        <p:dialog header="Ajouter Avocat" widgetVar="ajouterAvocat" modal="true" >
+            <h:form id="formAjouterAvocat">
+                <h:panelGrid columns="4" cellpadding="10">
+                    <h:outputText value="Nom" />
+                    <p:inputText value="#{avocatMB.avocat.nom}"/>
+                    <h:outputText value="Prenom" />
+                    <p:inputText  value="#{avocatMB.avocat.prenom}"/>
+                    <h:outputText value="Email" />
+                    <p:inputText value="#{avocatMB.avocat.email}" />
+                    <h:outputText value="Telephone" />
+                    <p:inputText  value="#{avocatMB.avocat.telephone}"/>
+                    <h:outputText value="Adresse" />
+                    <p:inputText  value="#{avocatMB.avocat.adresse}"/>
+                    <p:commandButton value="Ajouter" type="button" 
+                                     action="#{avocatMB.addAvocat()}"
+                                     oncomplete="ajouterAvocat.hide();" />
+                </h:panelGrid>
+            </h:form>
+        </p:dialog> 
+        <p:dialog header="Modifier Avocat" widgetVar="modifierAvocat" modal="true" >
+            <h:form>
+                <h:panelGrid columns="2" cellpadding="10">
+                    <h:outputText value="Nom" />
+                    <p:inputText />
+                    <h:outputText value="Prenom" />
+                    <p:inputText />
+                    <h:outputText value="Email" />
+                    <p:inputText />
+                    <h:outputText value="Telephone" />
+                    <p:inputText />
+                    <h:outputText value="Adresse" />
+                    <p:inputText />
+                    <p:commandButton value="Chercher" type="button" />
+                </h:panelGrid>
+            </h:form>
+        </p:dialog> 
+        <p:dialog header="Rechercher Avocat" widgetVar="rechercheAvocat" modal="true" >
+            <h:form>
+                <h:panelGrid columns="2" cellpadding="10">
+                    <h:outputText value="Nom" />
+                    <p:inputText />
+                    <h:outputText value="Prenom" />
+                    <p:inputText />
+                    <h:outputText value="Email" />
+                    <p:inputText />
+                    <h:outputText value="Telephone" />
+                    <p:inputText />
+                    <h:outputText value="Adresse" />
+                    <p:inputText />
+                    <p:commandButton value="Chercher" type="button" />
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>  
+        <p:dialog header="Ajouter Avocat" id="addAvocat" widgetVar="addAvocat"  >
+            <p:panel id="basic" header="Basic Panel" footer="Panel Footer" style="margin-bottom:20px" closable="true" toggleable="true">
                 <h:panelGrid columns="2" cellpadding="10">
                     <i class="fa fa-apple Fs60"></i>
                     <h:outputText

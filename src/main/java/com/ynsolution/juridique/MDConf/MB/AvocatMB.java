@@ -107,6 +107,7 @@ public class AvocatMB {
     }
     
     public void chargerAllAvocat(){
+        System.out.println("com.ynsolution.juridique.MDConf.MB.AvocatMB.chargerAllAvocat()");
         try {
         avocats=avocatService.allAvocat();
         } catch (Exception e) {
@@ -134,6 +135,7 @@ public class AvocatMB {
     }
     
     public void viderParam(){
+        System.out.println("com.ynsolution.juridique.MDConf.MB.AvocatMB.viderParam()");
         avocat = new Avocat();
         avocats = new ArrayList<Avocat>();
     }
