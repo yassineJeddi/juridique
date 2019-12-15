@@ -20,6 +20,7 @@ import javax.persistence.Id;
 public class Avocat implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -52,10 +53,15 @@ public class Avocat implements Serializable {
     
     
 /**GETERS & SETTERS**/
-    @Id
+   
     public Long getId() {
         return id;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 
     public String getNom() {
         return nom;
@@ -129,9 +135,6 @@ public class Avocat implements Serializable {
         this.active = active;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Override
     public int hashCode() {

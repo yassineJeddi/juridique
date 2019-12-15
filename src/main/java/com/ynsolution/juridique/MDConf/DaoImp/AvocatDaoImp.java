@@ -28,7 +28,8 @@ public class AvocatDaoImp extends MbHibernateDaoSupport implements IAvocatDAO, S
 
     @Override
     public void addAvocat(Avocat a) {
-          Transaction tx = null;
+        
+        Transaction tx = null;
         Session session = getSessionFactory().openSession();
         try {
             session.setFlushMode(FlushMode.AUTO);
@@ -45,17 +46,18 @@ public class AvocatDaoImp extends MbHibernateDaoSupport implements IAvocatDAO, S
 
     @Override
     public void editAvocat(Avocat a) {
-        Transaction tx = null;
-        Session session = getSessionFactory().openSession();
+        //Transaction tx = null;
+       // Session session = getSessionFactory().openSession();
         try {
-            session.setFlushMode(FlushMode.AUTO);
+            this.getHibernateTemplate().save(a);
+           /* session.setFlushMode(FlushMode.AUTO);
             tx = session.beginTransaction(); 
             session.merge(a);
             tx.commit();
-            session.close();
+            session.close();*/
         } catch (Exception exp) {
-            tx.rollback();
-            session.close(); 
+           // tx.rollback();
+           // session.close(); 
             System.out.println("DAO ----> Erreur de modification avocat car "+exp.getMessage());
         }
     }
@@ -110,25 +112,25 @@ public class AvocatDaoImp extends MbHibernateDaoSupport implements IAvocatDAO, S
           List<Avocat> l = new ArrayList<Avocat>();
           String req = "From Avocat a where 1=1  ";
           if(a!=null){
-              if(a.getNom() != null){
+              if(a.getNom() != null && !a.getNom().isEmpty()){
                   req = req +" AND a.nom like '%"+a.getNom()+"%' ";
               }
-              if(a.getNom() != null){
+              if(a.getPrenom()!= null && !a.getPrenom().isEmpty()){
                   req = req +" AND a.prenom like '%"+a.getPrenom()+"%' ";
               }
-              if(a.getNom() != null){
+              if( a.getCin()!= null && !a.getCin().isEmpty() ){
                   req = req +" AND a.cin like '%"+a.getCin()+"%' ";
               }
-              if(a.getNom() != null){
+              if(a.getAdresse()!= null && !a.getAdresse().isEmpty()){
                   req = req +" AND a.adresse like '%"+a.getAdresse()+"%' ";
               }
-              if(a.getNom() != null){
+              if(a.getAdresseBureau()!= null && !a.getAdresseBureau().isEmpty()){
                   req = req +" AND a.adresseBureau like '%"+a.getAdresseBureau()+"%' ";
               }
-              if(a.getNom() != null){
+              if(a.getEmail()!= null && !a.getEmail().isEmpty()){
                   req = req +" AND a.email like '%"+a.getEmail()+"%' ";
               }
-              if(a.getNom() != null){
+              if(a.getNumCompte()!= null && !a.getNumCompte().isEmpty()){
                   req = req +" AND a.numCompte like '%"+a.getNumCompte()+"%' ";
               }
           }

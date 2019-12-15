@@ -13,16 +13,18 @@
                         <h:form>
                             <p:toolbar>
                                 <f:facet name="left">
-                                    <p:commandButton value="Rechercher" type="button" icon="fa fa-search"  
-                                                     onclick="PF('rechercheAvocat').show();" />
+                                    <p:commandButton value="Rechercher"  icon="fa fa-search"
+                                                     action="#{avocatMB.viderParam()}"  
+                                                     onclick="PF('rechercheAvocat').show();"
+                                                     update=":idFormChercherAvocat,:formAvocat" />
                                     <span class="ui-separator" style="padding-right: 5px;">
                                         <span class="fa fa-ellipsis-v SoftGray" />
                                     </span>
                                         
-                                    <p:commandButton value="Ajouter" type="button" icon="fa fa-plus" 
+                                    <p:commandButton value="Ajouter" icon="fa fa-plus" 
                                                      onclick="PF('ajouterAvocat').show();"
                                                      action="#{avocatMB.viderParam()}"
-                                                     update=":formAvocat"/>
+                                                     update=":idFormAjouterAvocat,:formAvocat"/>
 
                                     <span class="ui-separator" style="padding-right: 5px;">
                                         <span class="fa fa-ellipsis-v SoftGray" />
@@ -39,7 +41,7 @@
                                 </f:facet>
 
                                 <f:facet name="right">
-                                    <p:commandButton value="Aficher Touts" type="button" 
+                                    <p:commandButton value="Aficher Touts"  
                                                      icon="fa fa-search" 
                                                      action="#{avocatMB.chargerAllAvocat()}"
                                                      update=":formAvocat"/>
@@ -60,7 +62,7 @@
                 <div class="card no-margin">
                     <h:form id="formAvocat">
                             <p:dataTable id="avocat" widgetVar="avocat" var="avocat" value="#{avocatMB.avocats}" 
-                                selectionMode="single" reflow="true"
+                                 reflow="true"
                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                 selection="#{avocatMB.avocat}" 
                                 paginatorPosition="bottom"
@@ -86,10 +88,10 @@
                         </p:column>
 
                         <p:column headerText="Actions" >
-                            <p:commandButton value="Save" icon="fa fa-save" />
-                            <p:commandButton value="Update" icon="fa fa-upload" />
-                            <p:commandButton value="Delete" icon="fa fa-trash" />
-                            <p:commandButton value="Homepage" icon="fa fa-home" />
+                            <p:commandButton value="Modifier" icon="fa fa-edit" 
+                                             onclick="PF('modifierAvocat').show();"
+                                             action="#{avocatMB.chargerAvocat(avocat)}"
+                                             update=":idFormModifierAvocat" />
                         </p:column>
                     </p:dataTable>
                         </h:form>
@@ -98,7 +100,7 @@
         </div>
         
         <p:dialog header="Ajouter Avocat" widgetVar="ajouterAvocat" modal="true" >
-            <h:form id="formAjouterAvocat">
+            <h:form id="idFormAjouterAvocat">
                 <h:panelGrid columns="4" cellpadding="10">
                     <h:outputText value="Nom" />
                     <p:inputText value="#{avocatMB.avocat.nom}"/>
@@ -110,43 +112,48 @@
                     <p:inputText  value="#{avocatMB.avocat.telephone}"/>
                     <h:outputText value="Adresse" />
                     <p:inputText  value="#{avocatMB.avocat.adresse}"/>
-                    <p:commandButton value="Ajouter" type="button" 
+                    <p:commandButton value="Ajouter"  
                                      action="#{avocatMB.addAvocat()}"
-                                     oncomplete="ajouterAvocat.hide();" />
+                                     onclick ="ajouterAvocat.hide();" />
                 </h:panelGrid>
             </h:form>
         </p:dialog> 
         <p:dialog header="Modifier Avocat" widgetVar="modifierAvocat" modal="true" >
-            <h:form>
-                <h:panelGrid columns="2" cellpadding="10">
+            <h:form id="idFormModifierAvocat">
+                <h:panelGrid columns="4" cellpadding="10">
                     <h:outputText value="Nom" />
-                    <p:inputText />
+                    <p:inputText value="#{avocatMB.avocat.nom}"/>
                     <h:outputText value="Prenom" />
-                    <p:inputText />
+                    <p:inputText  value="#{avocatMB.avocat.prenom}"/>
                     <h:outputText value="Email" />
-                    <p:inputText />
+                    <p:inputText value="#{avocatMB.avocat.email}" />
                     <h:outputText value="Telephone" />
-                    <p:inputText />
+                    <p:inputText  value="#{avocatMB.avocat.telephone}"/>
                     <h:outputText value="Adresse" />
-                    <p:inputText />
-                    <p:commandButton value="Chercher" type="button" />
+                    <p:inputText  value="#{avocatMB.avocat.adresse}"/>
+                    <p:commandButton value="Modifier"  
+                                     action="#{avocatMB.editAvocat()}"
+                                     onclick ="modifierAvocat.hide();" />
                 </h:panelGrid>
             </h:form>
         </p:dialog> 
         <p:dialog header="Rechercher Avocat" widgetVar="rechercheAvocat" modal="true" >
-            <h:form>
+            <h:form id="idFormChercherAvocat">
                 <h:panelGrid columns="2" cellpadding="10">
                     <h:outputText value="Nom" />
-                    <p:inputText />
+                    <p:inputText value="#{avocatMB.avocat.nom}"/>
                     <h:outputText value="Prenom" />
-                    <p:inputText />
+                    <p:inputText  value="#{avocatMB.avocat.prenom}"/>
                     <h:outputText value="Email" />
-                    <p:inputText />
+                    <p:inputText value="#{avocatMB.avocat.email}" />
                     <h:outputText value="Telephone" />
-                    <p:inputText />
+                    <p:inputText  value="#{avocatMB.avocat.telephone}"/>
                     <h:outputText value="Adresse" />
-                    <p:inputText />
-                    <p:commandButton value="Chercher" type="button" />
+                    <p:inputText  value="#{avocatMB.avocat.adresse}"/>
+                    <p:commandButton value="Chercher" 
+                                     action="#{avocatMB.chargerAllAvocatParam()}"
+                                     onclick ="rechercheAvocat.hide();"
+                                     update=":formAvocat"/>
                 </h:panelGrid>
             </h:form>
         </p:dialog>  

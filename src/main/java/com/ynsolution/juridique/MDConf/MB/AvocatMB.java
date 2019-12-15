@@ -67,18 +67,16 @@ public class AvocatMB {
     public void init() {
         WebApplicationContext ctx = FacesContextUtils.getWebApplicationContext(FacesContext.getCurrentInstance());
         avocatService = ctx.getBean(IAvocatService.class);
+        viderParam();
     }
-    
     
     public void addAvocat(){
         try {
             avocatService.addAvocat(avocat);
             viderParam();
-            avocats = avocatService.allAvocat();
         } catch (Exception e) {
             System.out.println("MB ====> Erreur d'enregistrement De l'avocat car "+e.getMessage());
         }
-        
     }
     public void editAvocat(){
         try {
@@ -107,7 +105,6 @@ public class AvocatMB {
     }
     
     public void chargerAllAvocat(){
-        System.out.println("com.ynsolution.juridique.MDConf.MB.AvocatMB.chargerAllAvocat()");
         try {
         avocats=avocatService.allAvocat();
         } catch (Exception e) {
@@ -135,7 +132,6 @@ public class AvocatMB {
     }
     
     public void viderParam(){
-        System.out.println("com.ynsolution.juridique.MDConf.MB.AvocatMB.viderParam()");
         avocat = new Avocat();
         avocats = new ArrayList<Avocat>();
     }
