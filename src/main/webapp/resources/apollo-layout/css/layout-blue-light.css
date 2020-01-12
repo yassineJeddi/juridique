@@ -1786,4 +1786,10 @@ h2 {
     left: 15%; }
   .landing-wrapper .landing-footer img {
     width: 150px; } }
+ .ui-panelgrid.showcase-text-align-center .ui-grid-responsive .ui-panelgrid-cell {
+        text-align: center;
+    }
+    .customPanelGrid .ui-panelgrid-content {
+        align-items: center;
+    }
 /* Add your customizations of layout here */
