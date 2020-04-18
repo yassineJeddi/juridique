@@ -11,45 +11,6 @@
             <div class="ui-g-12">
                     <div class="card">
                         <h:form>
-                            <p:panel id="horizontal" header="Recherche Action" toggleable="true"  >
-                            <div class="no-margin">
-                                <p:panelGrid columns="3" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
-                                    <p:inputText placeholder="N° Système"/>
-                                    <p:selectOneMenu  value="#{selectOneMenuView.console}" >
-                                        <f:selectItem itemLabel="Type" itemValue="" />
-                                        <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-                                        <f:selectItem itemLabel="PS4" itemValue="PS4" />
-                                        <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
-                                    </p:selectOneMenu>
-                                    <p:selectOneMenu  value="#{selectOneMenuView.console}" style="margin-bottom:10px;">
-                                        <f:selectItem itemLabel="Suos Type" itemValue="" />
-                                        <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-                                        <f:selectItem itemLabel="PS4" itemValue="PS4" />
-                                        <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
-                                    </p:selectOneMenu>
-                                    <p:inputText placeholder="Référence"/>
-                                    <p:inputText placeholder="Référence Tribunal"/>
-                                    <p:inputText placeholder="Date Remise"/>
-                                    <p:outputLabel value="Date Creation Entre"/>
-                                    <p:calendar   placeholder="Date Debut" showOn="button"/>
-                                    <p:calendar   placeholder="Date Fin" showOn="button"/>
-                                </p:panelGrid>
-                            </div>
-                            <p:toolbar>
-                                <f:facet name="left">
-                                    <p:spacer />
-                                </f:facet>
-                                <f:facet name="right">
-                                    <p:commandButton type="button" value="Chercher" icon="fa fa-search" />
-                                </f:facet>
-                            </p:toolbar>
-                            </p:panel>
-                        </h:form>
-                    </div>
-            </div>
-            <div class="ui-g-12">
-                    <div class="card">
-                        <h:form>
                             <p:toolbar>
                                 <f:facet name="left">
                                     <p:commandButton type="button" value="New" icon="fa fa-plus" />

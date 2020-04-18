@@ -9,6 +9,31 @@
     </bean>
     <!-- Debut de declaration des beans d'aplication -->
     
+    <!-- Debut Litige -->
+    
+    <!-- TypeLitige -->
+    <bean id="typeLitigeService" class="com.ynsolution.juridique.MDLitige.Service.TypeLitigeServiceImp">
+        <property name="typeLitigeDaoImp" ref="typeLitigeDaoImp" /> 
+    </bean>
+    <bean id="typeLitigeDaoImp" class="com.ynsolution.juridique.MDLitige.DAO.TypeLitigeDaoImp">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="adverseService" class="com.ynsolution.juridique.MDLitige.Service.AdverseServiceImp">
+        <property name="adverseDaoImp" ref="adverseDaoImp" /> 
+    </bean>
+    <bean id="adverseDaoImp" class="com.ynsolution.juridique.MDLitige.DAO.AdverseDaoImp">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="litigeService" class="com.ynsolution.juridique.MDLitige.Service.LitigeServiceImp">
+        <property name="litigeDaoImp" ref="litigeDaoImp" /> 
+    </bean>
+    <bean id="litigeDaoImp" class="com.ynsolution.juridique.MDLitige.DAO.LitigeDaoImp">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <!-- Fin Litige -->
     
     <!-- Entite -->
     <bean id="entiteService" class="com.ynsolution.juridique.MDEntite.ServiceImp.EntiteServiceImp">
@@ -34,7 +59,6 @@
     <bean id="avocatDAOImp" class="com.ynsolution.juridique.MDConf.DaoImp.AvocatDaoImp">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
-    
     
     
     

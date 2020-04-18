@@ -12,8 +12,16 @@
                 <div class="layout-menu-title">MENU</div>
                 <h:form id="menuform">
                     <pa:menu>
-                        <p:menuitem id="apl_dashboard" value="Dashboard" icon="fa fa-dashboard" outcome="/home/dashboard"/>
+                        <p:menuitem id="apl_dashboard" value="Tableau de bord" icon="fa fa-dashboard" outcome="/home/dashboard"/>
+                        <p:submenu id="litige_default" label="Litige" icon="fa fa-bank">
+                            <p:menuitem id="litige_dashboard" value="Tableau de bord" icon="fa fa-dashboard" outcome="/litige/dashboard"/>
+                            <p:menuitem id="litige_gerer" value="Gerer" icon="fa fa-sliders" outcome="/litige/gerer" />
+                            <p:menuitem id="litige_empty" value="Empty Page" icon="fa fa-square-o" outcome="/litige/empty" />
+                            <p:menuitem id="litige_config" value="Configuration"  styleClass="blue-theme"  icon="fa fa-cogs" outcome="/litige/configurer" />
+                            <p:menuitem id="litige_autori" value="Autorisation" styleClass="pink-theme" icon="fa fa-street-view" outcome="/litige/autoriser" />
+                        </p:submenu>
                         <p:submenu id="aex_default" label="Actions extrajudiciaires"  styleClass="orange-theme" icon="fa fa-connectdevelop">
+                            <p:menuitem id="aex_gerer" value="Gerer" icon="fa fa-sliders" outcome="/actionsExtrajudiciaires/gerer" />
                             <p:menuitem id="aex_empty" value="Empty Page" styleClass="blue-theme" icon="fa fa-square-o" outcome="/actionsExtrajudiciaires/empty" />
                             <p:menuitem id="aex_config" value="Configuration"  styleClass="blue-theme"  icon="fa fa-cogs" outcome="/actionsExtrajudiciaires/configurer" />
                             <p:menuitem id="aex_autori" value="Autorisation" styleClass="pink-theme" icon="fa fa-street-view" outcome="/actionsExtrajudiciaires/autoriser" />

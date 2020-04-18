@@ -1,0 +1,137 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12">
+                    <div class="card">
+                        <h:form>
+                            <p:panel id="horizontal" header="Recherche d'un litige" toggleable="true" collapsed="true"   >
+                            <div class="no-margin">
+                                <p:panelGrid columns="3" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                                    <p:inputText placeholder="N° Système"/>
+                                    <p:selectOneMenu  value="#{selectOneMenuView.console}" >
+                                        <f:selectItem itemLabel="Type" itemValue="" />
+                                        <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+                                        <f:selectItem itemLabel="PS4" itemValue="PS4" />
+                                        <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+                                    </p:selectOneMenu>
+                                    <p:selectOneMenu  value="#{selectOneMenuView.console}" style="margin-bottom:10px;">
+                                        <f:selectItem itemLabel="Suos Type" itemValue="" />
+                                        <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+                                        <f:selectItem itemLabel="PS4" itemValue="PS4" />
+                                        <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+                                    </p:selectOneMenu>
+                                    <p:inputText placeholder="Référence"/>
+                                    <p:inputText placeholder="Référence Tribunal"/>
+                                    <p:inputText placeholder="Date Remise"/>
+                                    <p:outputLabel value="Date Creation Entre"/>
+                                    <p:calendar   placeholder="Date Debut" showOn="button"/>
+                                    <p:calendar   placeholder="Date Fin" showOn="button"/>
+                                </p:panelGrid>
+                            </div>
+                            <p:toolbar>
+                                <f:facet name="left">
+                                    <p:spacer />
+                                </f:facet>
+                                <f:facet name="right">
+                                    <p:commandButton action="#{litigeMb.findAllLitige()}" 
+                                                     type="button" value="Chercher" icon="fa fa-search"
+                                                     update="" />
+                                </f:facet>
+                            </p:toolbar>
+                            </p:panel>
+                        </h:form>
+                    </div>
+            </div>
+            <div class="ui-g-12">
+                <div class="card no-margin">
+                    <h:form id="idFormeDataLitige" >
+                            <p:toolbar>
+                                <f:facet name="left">
+                                    <p:commandButton type="button" action="#{litigeMb.prepAddLitige()}" value="Ajouter" onclick="PF('addLitige').show();" icon="fa fa-plus" />
+                                    <span class="ui-separator" style="padding-right: 5px;">
+                                        <span class="fa fa-ellipsis-v SoftGray" />
+                                    </span>
+                                    <p:commandButton type="button" title="Exporter" icon="fa fa-download" >
+                                         <p:dataExporter type="xls" target=":idFormeDataLitige" fileName="Liste des type litige" pageOnly="false" />
+                                    </p:commandButton>
+                                    <p:commandButton actionListener="#{litigeMb.chargerLitige()}" 
+                                                     update=":idFormeDataLitige,:idFormeDataLitige:idDataLitige" 
+                                                     title="Charger la liste" icon="fa fa-refresh" />
+                                    <p:commandButton actionListener="#{litigeMb.viderLitige()}" 
+                                                     update=":idFormeDataLitige,:idFormeDataLitige:idDataLitige" 
+                                                         title="Vider la liste" icon="fa fa-remove" />
+                                </f:facet>
+                                <f:facet name="right">
+                                    <p:commandButton title="Modification"  onclick="PF('editLitige').show();" 
+                                                     update=":idEditLitige" icon="fa fa-edit" />
+                                    <p:commandButton title="Information"   onclick="PF('infoLitige').show();" 
+                                                     update=":idInfoLitige" icon="fa fa-arrows-alt" />
+                                    <p:commandButton title="Suppression"  onclick="PF('infoLitige').show();"
+                                                     update=":idFormeDataLitige" icon="fa fa-trash" />
+                                </f:facet>
+                            </p:toolbar>
+                            <p:dataTable  var="lit" value="#{litigeMb.litiges}" id="idDataLitige"
+                                     selectionMode="single" reflow="true"
+                                     paginatorPosition="bottom"
+                                     selection="#{litigeMb.litige}" 
+                                     rowKey="#{lit.id}" paginator="true" rows="5">
+                                
+                                <p:column headerText="N° system" sortBy="#{lit.id}"  filterBy="#{lit.id}" filterMatchMode="contains">
+                                    <h:outputText value="#{lit.id}" />
+                                </p:column>
+                                <p:column headerText="Titre" sortBy="#{lit.titre}">
+                                    <h:outputText value="#{lit.titre}" />
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                </div>
+            </div>
+        </div> <!-- Gestion  Litige -->
+        <!-- Ajouter  Litige -->
+        <p:dialog modal="true" header="Ajouter Litige" widgetVar="addLitige" >
+            <h:form id="idAddLitige">
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Titre :"/>
+                    <p:inputText value="#{litigeMb.litige.titre}"/>
+                    <p:outputLabel value="Description :"/>
+                    <p:inputTextarea rows="5"  value="#{litigeMb.litige.commentaire}" />
+                    <p:commandButton value="Enregistrer" action="#{litigeMb.addLitige()}"
+                                     update=":idFormeDataLitige,:idFormeDataLitige:idDataLitige"  onclick="PF('addLitige').hide();"/>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+        <!-- Modifier  Litige -->
+        <p:dialog modal="true" header="Modifier Type Litige" widgetVar="editLitige" >
+            <h:form id="idEditLitige">
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Titre :"/>
+                    <p:inputText   value="#{litigeMb.litige.titre}"/>
+                    <p:outputLabel value="Description :"/>
+                    <p:inputTextarea rows="5"  value="#{litigeMb.litige.commentaire}" />
+                    <p:commandButton value="Enregistrer" action="#{litigeMb.editLitige()}"
+                                     update=":idFormeDataLitige,:idFormeDataLitige:idDataLitige"  onclick="PF('editLitige').hide();"/>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+        <!-- Information  Litige -->
+        <p:dialog modal="true" header="Detail Litige" widgetVar="infoLitige" >
+            <h:form id="idInfoLitige">
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Titre :"/>
+                    <p:outputLabel value="#{litigeMb.litige.titre}"/>
+                    <p:outputLabel value="Description :"/>
+                    <p:outputLabel value="#{litigeMb.litige.commentaire}" />
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+        <!-- Fin Gestion Type Litige -->
+        
+        
+    </ui:define>
+
+</ui:composition>

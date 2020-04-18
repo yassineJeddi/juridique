@@ -43,6 +43,9 @@ public class Contentieux implements Serializable {
     @Column(name = "MONTANTRISQUE")
     private String montantRisque;
     
+    @Column(name = "TYPE")
+    private String type;
+    
     
     
 

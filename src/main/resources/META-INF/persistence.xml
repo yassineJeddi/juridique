@@ -6,6 +6,9 @@
     <class>com.ynsolution.juridique.MDEntite.entite.TypeEntite</class>
     <class>com.ynsolution.juridique.MDCtx.entite.Contentieux</class>
     <class>com.ynsolution.juridique.MDConf.Entite.Avocat</class>
+    <class>com.ynsolution.juridique.MDLitige.Entite.Litige</class>
+    <class>com.ynsolution.juridique.MDLitige.Entite.TypeLitige</class>
+    <class>com.ynsolution.juridique.MDLitige.Entite.Adverse</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://192.168.182.135;databaseName=juridique"/>

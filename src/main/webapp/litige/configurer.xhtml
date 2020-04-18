@@ -1,0 +1,321 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="breadcrumb">
+        <li>Pages</li>
+        <li>/</li>
+        <li><p:link outcome="/contentieux/empty">Empty</p:link></li>
+    </ui:define>
+
+    <ui:define name="content">
+        
+        <div class="container">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-lg-6">
+                    <!-- Gestion les type de litige --> 
+                        
+                    <div class=" no-margin">
+                        <p:fieldset legend="Gestion les type de litige" toggleable="true" toggleSpeed="500"  collapsed="true">
+                            <h:form id="idFormTypeLitige">
+                            <p:toolbar>
+                                <f:facet name="left">
+                                    <p:commandButton type="button" action="#{typeLitigeMb.prepAddTypeLitige()}" value="Ajouter" onclick="PF('addTypeLitige').show();" icon="fa fa-plus" />
+                                    <span class="ui-separator" style="padding-right: 5px;">
+                                        <span class="fa fa-ellipsis-v SoftGray" />
+                                    </span>
+                                    <p:commandButton type="button" title="Exporter" icon="fa fa-download" >
+                                         <p:dataExporter type="xls" target=":idFormTypeLitige:idDataTypeLitige" fileName="Liste des type litige" pageOnly="false" />
+                                    </p:commandButton>
+                                        <p:commandButton actionListener="#{typeLitigeMb.chargerTypeLitige()}" 
+                                                         update=":idFormTypeLitige,:idFormTypeLitige:idDataTypeLitige" 
+                                                         title="Charger la liste" icon="fa fa-refresh" />
+                                        <p:commandButton actionListener="#{typeLitigeMb.viderTypeLitige()}" 
+                                                         update=":idFormTypeLitige,:idFormTypeLitige:idDataTypeLitige" 
+                                                         title="Vider la liste" icon="fa fa-remove" />
+                                </f:facet>
+                                <f:facet name="right">
+                                    <p:commandButton title="Modification"  onclick="PF('editTypeLitige').show();" 
+                                                     update=":idEditTypeLitige" icon="fa fa-edit" />
+                                    <p:commandButton title="Information"   onclick="PF('infoTypeLitige').show();" 
+                                                     update=":idInfoTypeLitige" icon="fa fa-arrows-alt" />
+                                    <p:commandButton title="Suppression"  onclick="PF('infoTypeLitige').show();"
+                                                     update=":idInfoTypeLitige" icon="fa fa-trash" />
+                                </f:facet>
+                            </p:toolbar>
+                                <p:dataTable id="idDataTypeLitige" var="tl" value="#{typeLitigeMb.typeLitiges}" 
+                                     selectionMode="single" reflow="true"
+                                     paginatorPosition="bottom"
+                                     selection="#{typeLitigeMb.typeLitige}" 
+                                     rowKey="#{tl.id}" paginator="true" rows="5">
+                            <p:column headerText="N°" sortBy="#{tl.id}" width="50">
+                                <h:outputText value="#{tl.id}" />
+                            </p:column>
+                                <p:column headerText="Titre" sortBy="#{tl.titre}" filterBy="#{tl.titre}" filterMatchMode="contains">
+                                <h:outputText value="#{tl.titre}" />
+                            </p:column>
+                                <p:column headerText="Description" sortBy="#{tl.description}" filterBy="#{tl.description}" filterMatchMode="contains">
+                                <h:outputText value="#{tl.description}" />
+                            </p:column>
+                        </p:dataTable>
+                        </h:form>
+                        </p:fieldset>
+                    </div>
+                    
+                    
+                </div>
+                <div class="ui-g-12 ui-lg-6">
+                    <!-- Right Side --> 
+                    
+                    <div class="no-margin">
+                        <p:fieldset legend="Gestion des Adverse" toggleable="true" toggleSpeed="500"  collapsed="true">
+                        <h:form>
+                            <p:toolbar>
+                                <f:facet name="left">
+                                    <p:commandButton type="button" value="New" icon="fa fa-plus" />
+
+                                    <p:commandButton type="button" value="Open" icon="fa fa-folder-open" />
+
+                                    <span class="ui-separator" style="padding-right: 5px;">
+                                        <span class="fa fa-ellipsis-v SoftGray" />
+                                    </span>
+
+                                    <p:commandButton type="button" title="Save" icon="fa fa-save" />
+                                    <p:commandButton type="button" title="Delete" icon="fa fa-trash" />
+                                    <p:commandButton type="button" title="Print" icon="fa fa-print" />
+                                </f:facet>
+
+                                <f:facet name="right">
+                                    <p:menuButton value="Options">
+                                        <p:menuitem value="Save" icon="fa fa-save" />
+                                        <p:menuitem value="Update" icon="fa fa-upload" />
+                                        <p:menuitem value="Delete" icon="fa fa-trash" />
+                                        <p:menuitem value="Homepage" icon="fa fa-home" />
+                                    </p:menuButton>
+                                </f:facet>
+                            </p:toolbar>
+                            
+                            <p:dataTable var="adv" value="#{adverseMb.adverses}" 
+                                     selectionMode="single" reflow="true"
+                                     paginatorPosition="bottom"
+                                     selection="#{adverseMb.adverse}" 
+                                     rowKey="#{adv.id}" paginator="true" rows="5">
+                                <p:column headerText="N°" sortBy="#{adv.id}" filterBy="#{adv.id}" filterMatchMode="contains">
+                                    <h:outputText value="#{adv.id}" />
+                                </p:column>
+                                <p:column headerText="Year" sortBy="#{adv.typeAdverse}" filterBy="#{adv.typeAdverse}" filterMatchMode="contains">
+                                    <h:outputText value="#{adv.typeAdverse}" />
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                        </p:fieldset>
+                    </div>
+                    
+                </div>
+                 
+                <div class="ui-g-12 ui-lg-12">
+                    <div class="no-margin">
+                        <p:fieldset legend="Gestion des Adverse" toggleable="true" toggleSpeed="500"  collapsed="true">
+                        <h:form id="idFormAdverse">
+                            <p:toolbar>
+                                <f:facet name="left">
+                                    <p:commandButton type="button" action="#{typeLitigeMb.prepAddTypeLitige()}" value="Ajouter" onclick="PF('addAdverse').show();" icon="fa fa-plus" />
+                                    <span class="ui-separator" style="padding-right: 5px;">
+                                        <span class="fa fa-ellipsis-v SoftGray" />
+                                    </span>
+                                    <p:commandButton type="button" title="Exporter" icon="fa fa-download" >
+                                         <p:dataExporter type="xls" target=":idFormTypeLitige:idDataTypeLitige" fileName="Liste des type litige" pageOnly="false" />
+                                    </p:commandButton>
+                                        <p:commandButton actionListener="#{adverseMb.chargerAdverse()}" 
+                                                         update=":idFormAdverse,:idFormAdverse:idDataAdverse" 
+                                                         title="Charger la liste" icon="fa fa-refresh" />
+                                        <p:commandButton actionListener="#{adverseMb.viderAdverse()}" 
+                                                         update=":idFormAdverse,:idFormAdverse:idDataAdverse" 
+                                                         title="Vider la liste" icon="fa fa-remove" />
+                                </f:facet>
+                                <f:facet name="right">
+                                    <p:commandButton title="Modification"  onclick="PF('editTypeLitige').show();" 
+                                                     update=":idEditTypeLitige" icon="fa fa-edit" />
+                                    <p:commandButton title="Information"   onclick="PF('infoAdverse').show();" 
+                                                     update=":idInfoAdverse" icon="fa fa-arrows-alt" />
+                                    <p:commandButton title="Suppression"  onclick="PF('infoTypeLitige').show();"
+                                                     update=":idInfoTypeLitige" icon="fa fa-trash" />
+                                </f:facet>
+                            </p:toolbar>
+                            
+                            <p:dataTable var="adv" value="#{adverseMb.adverses}" id="idDataAdverse"
+                                     selectionMode="single" reflow="true"
+                                     paginatorPosition="bottom"
+                                     selection="#{adverseMb.adverse}" 
+                                     rowKey="#{adv.id}" paginator="true" rows="5">
+                                <p:column headerText="N°" sortBy="#{adv.id}" filterBy="#{adv.id}" filterMatchMode="contains">
+                                    <h:outputText value="#{adv.id}" />
+                                </p:column>
+                                <p:column headerText="Type" sortBy="#{adv.typeAdverse}" filterBy="#{adv.typeAdverse}" filterMatchMode="contains">
+                                    <h:outputText value="#{adv.typeAdverse}" />
+                                </p:column>
+                                <p:column headerText="Libele" sortBy="#{adv.libele}" filterBy="#{adv.libele}" filterMatchMode="contains">
+                                    <h:outputText value="#{adv.libele}" />
+                                </p:column>
+                                <p:column headerText="CIN" sortBy="#{adv.cin}" filterBy="#{adv.cin}" filterMatchMode="contains">
+                                    <h:outputText value="#{adv.cin}" />
+                                </p:column>
+                                <p:column headerText="Nom Prenom" sortBy="#{adv.nom} #{adv.prenom}" filterBy="#{adv.nom} #{adv.prenom}" filterMatchMode="contains">
+                                    <h:outputText value="#{adv.nom} #{adv.prenom}" />
+                                </p:column> 
+                            </p:dataTable>
+                        </h:form>
+                        </p:fieldset>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Gestion Type Litige -->
+        <!-- Ajouter Type Litige -->
+        <p:dialog modal="true" header="Ajouter Type Litige" widgetVar="addTypeLitige" >
+            <h:form id="idAddTypeLitige">
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Titre :"/>
+                    <p:inputText value="#{typeLitigeMb.typeLitige.titre}"/>
+                    <p:outputLabel value="Description :"/>
+                    <p:inputTextarea rows="5"  value="#{typeLitigeMb.typeLitige.description}" />
+                    <p:commandButton value="Enregistrer" action="#{typeLitigeMb.addTypeLitige()}"
+                                     update=":idFormTypeLitige:idDataTypeLitige" onclick="PF('addTypeLitige').hide();"/>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+        <!-- Modifier Type Litige -->
+        <p:dialog modal="true" header="Modifier Type Litige" widgetVar="editTypeLitige" >
+            <h:form id="idEditTypeLitige">
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Titre :"/>
+                    <p:inputText   value="#{typeLitigeMb.typeLitige.titre}"/>
+                    <p:outputLabel value="Description :"/>
+                    <p:inputTextarea rows="5"  value="#{typeLitigeMb.typeLitige.description}" />
+                    <p:commandButton value="Enregistrer" action="#{typeLitigeMb.editTypeLitige()}"
+                                     update=":idFormTypeLitige:idDataTypeLitige" onclick="PF('editTypeLitige').hide();"/>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+        <!-- Information Type Litige -->
+        <p:dialog modal="true" header="Detail Type Litige" widgetVar="infoTypeLitige" >
+            <h:form id="idInfoTypeLitige">
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Titre :"/>
+                    <p:outputLabel value="#{typeLitigeMb.typeLitige.titre}"/>
+                    <p:outputLabel value="Description :"/>
+                    <p:outputLabel value="#{typeLitigeMb.typeLitige.description}" />
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+        <!-- Fin Gestion Type Litige -->
+        
+        <!-- Gestion des Adverse -->
+        <!-- Ajouter Type Litige -->
+        <p:dialog modal="true" header="Ajouter Adverse" widgetVar="addAdverse" >
+            <h:form id="idaddAdverse">
+                <h:panelGrid columns="2"  styleClass="ui-panelgrid-blank">
+                    <p:outputLabel value="Type :"/>
+                    <p:selectOneMenu  value="#{adverseMb.adverse.typeAdverse}" style="width: 300px">
+                        <f:selectItem itemLabel="" itemValue="" />
+                        <f:selectItem itemLabel="Physique" itemValue="Physique" />
+                        <f:selectItem itemLabel="Morale" itemValue="Morale" />
+                        <p:ajax listener="#{adverseMb.changeTypeAdverse()}" update=":idaddAdverse" />
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                <h:panelGrid   columns="4" style=" #{(adverseMb.adverse.typeAdverse=='Physique')?'':'display: none;' } ">
+                    <p:outputLabel value="Nom :"/>
+                    <p:inputText value="#{adverseMb.adverse.nom}"/>
+                    <p:outputLabel value="Prenom :"/>
+                    <p:inputText value="#{adverseMb.adverse.prenom}"/>
+                    <p:outputLabel value="CIN :"/>
+                    <p:inputText value="#{adverseMb.adverse.cin}"/>
+                    <p:outputLabel value="Date naissance :" />
+                    <p:calendar value="#{adverseMb.adverse.dateNaissance}" pattern="dd/MM/yyyy"  showOn="button" />
+                    <p:outputLabel value="Gsm :"/>
+                    <p:inputMask value="#{adverseMb.adverse.gsm}" mask="(999) 999-999999"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2" style=" #{(adverseMb.adverse.typeAdverse=='Physique')?'':'display: none;' } ">
+                    <p:outputLabel value="Adresse :"/>
+                    <p:inputTextarea value="#{adverseMb.adverse.adresse1}" cols="55" rows="1" placeholder="Votre Message" autoResize="false"/>
+                </h:panelGrid>
+                <h:panelGrid columns="4" style=" #{(adverseMb.adverse.typeAdverse=='Morale')?'':'display: none;' } ">
+                    <p:outputLabel value="Libele :"/>
+                    <p:inputText value="#{adverseMb.adverse.libele}" />
+                    <p:outputLabel value="ICE :"/>
+                    <p:inputMask value="#{adverseMb.adverse.ice}" mask="999999999999999"/>
+                    <p:outputLabel value="Patente :"/>
+                    <p:inputMask value="#{adverseMb.adverse.patente}" mask="999999999999999"/>
+                    <p:outputLabel value="Tel :"/>
+                    <p:inputMask value="#{adverseMb.adverse.fixe}" mask="(999) 999-9999"/>
+                    <p:outputLabel value="Faxe :"/>
+                    <p:inputMask value="#{adverseMb.adverse.faxe}" mask="(999) 999-9999"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2" style=" #{(adverseMb.adverse.typeAdverse=='Morale')?'':'display: none;' } ">
+                    <p:outputLabel value="Adresse 1 :"/>
+                    <p:inputTextarea value="#{adverseMb.adverse.adresse1}" cols="55" rows="1" placeholder="Votre Message" autoResize="false"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2" style=" #{(adverseMb.adverse.typeAdverse=='Morale')?'':'display: none;' } ">
+                    <p:outputLabel value="Adresse 2 :"/>
+                    <p:inputTextarea value="#{adverseMb.adverse.adresse2}" cols="55" rows="1" placeholder="Votre Message" autoResize="false"/>
+                </h:panelGrid>
+                <h:panelGrid >
+                    <p:commandButton value="Enregistrer" action="#{adverseMb.addAdverse()}"
+                                     update=":idFormAdverse,:idFormAdverse:idDataAdverse,:idaddAdverse" onclick="PF('addAdverse').hide();"/>
+                    
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+        <!-- Information Type Litige -->
+        <p:dialog modal="true" header="Detail Adverse" widgetVar="infoAdverse" >
+            <h:form id="idInfoAdverse">
+                <h:panelGrid columns="2"  styleClass="ui-panelgrid-blank">
+                    <p:outputLabel value="Type :"/>
+                    <p:outputLabel  value="#{adverseMb.adverse.typeAdverse}" />
+                </h:panelGrid>
+                <h:panelGrid   columns="4" style=" #{(adverseMb.adverse.typeAdverse=='Physique')?'':'display: none;' } ">
+                    <p:outputLabel value="Nom :"/>
+                    <p:inputText readonly="true" value="#{adverseMb.adverse.nom}"/>
+                    <p:outputLabel value="Prenom :"/>
+                    <p:inputText readonly="true" value="#{adverseMb.adverse.prenom}"/>
+                    <p:outputLabel value="CIN :"/>
+                    <p:inputText readonly="true" value="#{adverseMb.adverse.cin}"/>
+                    <p:outputLabel value="Date naissance :" />
+                    <p:inputText readonly="true" value="#{adverseMb.adverse.dateNaissance}" /> 
+                    <p:outputLabel value="Gsm :"/>
+                    <p:inputMask readonly="true" value="#{adverseMb.adverse.gsm}" mask="(999) 999-999999"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2" style=" #{(adverseMb.adverse.typeAdverse=='Physique')?'':'display: none;' } ">
+                    <p:outputLabel value="Adresse :"/>
+                    <p:inputTextarea readonly="true" value="#{adverseMb.adverse.adresse1}" cols="55" rows="1" placeholder="Votre Message" autoResize="false"/>
+                </h:panelGrid>
+                <h:panelGrid columns="4" style=" #{(adverseMb.adverse.typeAdverse=='Morale')?'':'display: none;' } ">
+                    <p:outputLabel value="Libele :"/>
+                    <p:outputLabel value="#{adverseMb.adverse.libele}" />
+                    <p:outputLabel value="ICE :"/>
+                    <p:inputMask readonly="true" value="#{adverseMb.adverse.ice}" mask="999999999999999"/>
+                    <p:outputLabel value="Patente :"/>
+                    <p:inputMask readonly="true" value="#{adverseMb.adverse.patente}" mask="999999999999999"/>
+                    <p:outputLabel value="Tel :"/>
+                    <p:inputMask readonly="true" value="#{adverseMb.adverse.fixe}" mask="(999) 999-9999"/>
+                    <p:outputLabel value="Faxe :"/>
+                    <p:inputMask readonly="true" value="#{adverseMb.adverse.faxe}" mask="(999) 999-9999"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2" style=" #{(adverseMb.adverse.typeAdverse=='Morale')?'':'display: none;' } ">
+                    <p:outputLabel value="Adresse 1 :"/>
+                    <p:inputTextarea  readonly="true" value="#{adverseMb.adverse.adresse1}" cols="55" rows="1" placeholder="Votre Message" autoResize="false" />
+                </h:panelGrid>
+                <h:panelGrid columns="2" style=" #{(adverseMb.adverse.typeAdverse=='Morale')?'':'display: none;' } ">
+                    <p:outputLabel value="Adresse 2 :"/>
+                    <p:inputTextarea readonly="true" value="#{adverseMb.adverse.adresse2}" cols="55" rows="1" placeholder="Votre Message" autoResize="false"/>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+        <!-- Fin Gestion des Adverse -->
+    </ui:define>
+
+</ui:composition>

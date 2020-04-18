@@ -4,14 +4,12 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/template.xhtml">
-
-
     <ui:define name="content">
         <div class="ui-g">
             <div class="ui-g-12">
                     <div class="card">
                         <h:form>
-                            <p:panel id="horizontal" header="Recherche Action" toggleable="true"  >
+                            <p:panel id="horizontal" header="Recherche Dossier" toggleable="true" collapsed="true"   >
                             <div class="no-margin">
                                 <p:panelGrid columns="3" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
                                     <p:inputText placeholder="N° Système"/>
@@ -40,7 +38,9 @@
                                     <p:spacer />
                                 </f:facet>
                                 <f:facet name="right">
-                                    <p:commandButton type="button" value="Chercher" icon="fa fa-search" />
+                                    <p:commandButton action="#{litigeMb.findAllLitige()}" 
+                                                     type="button" value="Chercher" icon="fa fa-search"
+                                                     update="" />
                                 </f:facet>
                             </p:toolbar>
                             </p:panel>
@@ -49,7 +49,7 @@
             </div>
             <div class="ui-g-12">
                     <div class="card">
-                        <h:form>
+                        <h:form id="formeDataLitige">
                             <p:toolbar>
                                 <f:facet name="left">
                                     <p:commandButton type="button" value="New" icon="fa fa-plus" />
@@ -85,27 +85,19 @@
             <div class="ui-g-12">
                 <div class="card no-margin">
                         <h:form>
-                            <p:dataTable id="car" widgetVar="car" var="car" value="#{dtSelectionView.cars7}" 
+                            <p:dataTable id="tableLitige" widgetVar="lit" var="car" value="#{litigeMb.litiges}" 
                                 selectionMode="single" reflow="true"
                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                selection="#{dtSelectionView.selectedCar}" 
                                 paginatorPosition="bottom"
-                                rowKey="#{car.id}" paginator="true"  rows="10">
-                        <p:column headerText="Id" sortBy="#{car.id}"  filterBy="#{car.id}" filterMatchMode="contains">
-                            <h:outputText value="#{car.id}" />
+                                rowKey="#{lit.id}" paginator="true"  rows="10">
+                        <p:column headerText="N° system" sortBy="#{lit.id}"  filterBy="#{lit.id}" filterMatchMode="contains">
+                            <h:outputText value="#{lit.id}" />
                         </p:column>
 
-                        <p:column headerText="Year" sortBy="#{car.year}">
-                            <h:outputText value="#{car.year}" />
+                        <p:column headerText="Titre" sortBy="#{lit.titre}">
+                            <h:outputText value="#{lit.titre}" />
                         </p:column>
 
-                        <p:column headerText="Brand" sortBy="#{car.brand}">
-                            <h:outputText value="#{car.brand}" />
-                        </p:column>
-
-                        <p:column headerText="Color" sortBy="#{car.color}">
-                            <h:outputText value="#{car.color}" />
-                        </p:column>
 
                         <p:column headerText="Actions" >
                             <p:menuButton value="Options">
